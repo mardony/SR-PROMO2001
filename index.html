@@ -655,6 +655,8 @@
     </section>
 
     <!-- ===== INSCRITOS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
     <section id="inscritos" style="background: #F5ECD7; padding: 40px 0;">
         <div class="container" style="max-width: 1140px; margin: 0 auto; padding: 0 15px;">
             <h2 class="section-title">Equipos <span>Inscritos</span></h2>
@@ -665,9 +667,9 @@
                     <thead>
                         <tr style="background: #6A1B2A; color: white;">
                             <th style="padding: 16px; font-weight: bold; border-top-left-radius: 16px;">#</th>
-                            <th style="padding: 16px; font-weight: bold;">Equipo</th>
-                            <th style="padding: 16px; font-weight: bold;">Capitán (Delegado)</th>
                             <th style="padding: 16px; font-weight: bold;">Promoción</th>
+                            <th style="padding: 16px; font-weight: bold;">Equipo</th>
+                            <th style="padding: 16px; font-weight: bold;">Delegado</th>
                             <th style="padding: 16px; font-weight: bold; border-top-right-radius: 16px;">Deporte</th>
                         </tr>
                     </thead>
@@ -690,77 +692,60 @@
     </section>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Tu URL oficial de publicación CSV
-        const urlExcelCsv = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSb98PnRM7WWKZjvkYSe3s7J4R2AEIpdK7Kc8wIBqGn8rryxDveAqe-vYxBgXdWjwLwGSNYYDpsJNtf/pub?gid=0&single=true&output=csv";
+        document.addEventListener("DOMContentLoaded", function() {
+            const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSb98PnRM7WWKZjvkYSe3s7J4R2AEIpdK7Kc8wIBqGn8rryxDveAqe-vYxBgXdWjwLwGSNYYDpsJNtf/pub?gid=0&single=true&output=csv";
 
-        fetch(urlExcelCsv)
-            .then(response => {
-                if (!response.ok) throw new Error("Error en la red");
-                return response.text();
-            })
-            .then(data => {
-                // Dividir filas limpiando espacios invisibles
-                const filas = data.split(/\r?\n/);
-                const tbody = document.getElementById("tabla-equipos-body");
-                tbody.innerHTML = ""; 
+            Papa.parse(csvUrl, {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    const tbody = document.getElementById("tabla-equipos-body");
+                    tbody.innerHTML = "";
 
-                let contadorEquipos = 0;
+                    let total = 0;
 
-                for (let i = 1; i < filas.length; i++) {
-                    if (!filas[i].trim()) continue; 
+                    results.data.forEach(row => {
+                        // Saltar filas que no contengan un nombre de equipo asignado
+                        if (!row.Equipo || row.Equipo.trim() === "") return;
 
-                    // CORRECCIÓN CLAVE: Separar por punto y coma (;) debido al formato regional de Google en español
-                    const columnas = filas[i].split(";");
+                        total++;
 
-                    // Función para limpiar comillas
-                    const limpiar = (texto) => texto ? texto.replace(/^"|"$/g, '').trim() : "";
+                        // Alternar color de fondo por fila para mejorar legibilidad (#FDFBF7 / blanco)
+                        const fondoFila = total % 2 === 0 ? '#FDFBF7' : 'white';
 
-                    // Mapeo exacto según el orden de tus columnas:
-                    // Columna 0 = # | Columna 1 = Promoción | Columna 2 = Equipo | Columna 3 = Delegado | Columna 4 = Deporte
-                    const num = limpiar(columnas[0]);
-                    const promocion = limpiar(columnas[1]);
-                    const equipo = limpiar(columnas[2]);
-                    const delegado = limpiar(columnas[3]);
-                    const deporte = limpiar(columnas[4]);
+                        tbody.innerHTML += `
+                            <tr style="border-bottom: 1px solid #E8DCC4; background: ${fondoFila};">
+                                <td style="padding: 16px; color: #333; font-weight: bold;">${row["#"] || total}</td>
+                                <td style="padding: 16px; color: #666;">${row["Promoción"]}</td>
+                                <td style="padding: 16px;">
+                                    <span style="background: #6A1B2A; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                        ${row["Equipo"]}
+                                    </span>
+                                </td>
+                                <td style="padding: 16px; color: #444; font-weight: 500;">${row["Delegado"]}</td>
+                                <td style="padding: 16px; color: #666;">${row["Deporte"]}</td>
+                            </tr>`;
+                    });
 
-                    // Si no hay nombre de equipo o coincide con la cabecera, saltar fila
-                    if (!equipo || equipo.toLowerCase() === "equipo") continue;
-
-                    contadorEquipos++;
-
-                    const nuevaFila = `
-                        <tr style="border-bottom: 1px solid #E8DCC4; background: ${contadorEquipos % 2 === 0 ? '#FDFBF7' : 'white'};">
-                            <td style="padding: 16px; color: #333; font-weight: bold;">${num || contadorEquipos}</td>
-                            <td style="padding: 16px;">
-                                <span style="background: #6A1B2A; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                    ${equipo}
-                                </span>
+                    document.getElementById("total-equipos").innerHTML = `Total: ${total} equipos`;
+                },
+                error: function(err) {
+                    console.error("Error al procesar el archivo CSV:", err);
+                    document.getElementById("tabla-equipos-body").innerHTML = `
+                        <tr>
+                            <td colspan="5" style="padding: 40px; text-align: center; color: #D9534F; font-weight: bold;">
+                                <i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 10px; display: block;"></i>
+                                No se pudo sincronizar la lista de equipos.<br>
+                                <span style="font-size: 0.85rem; color: #999; font-weight: normal;">Revisa la consola del navegador para más detalles.</span>
                             </td>
-                            <td style="padding: 16px; color: #444; font-weight: 500;">${delegado}</td>
-                            <td style="padding: 16px; color: #666;">${promocion}</td>
-                            <td style="padding: 16px; color: #666;">${deporte}</td>
                         </tr>
                     `;
-                    tbody.insertAdjacentHTML("beforeend", nuevaFila);
                 }
-
-                document.getElementById("total-equipos").innerText = `Total: ${contadorEquipos} equipos`;
-            })
-            .catch(error => {
-                console.error("Error original:", error);
-                document.getElementById("tabla-equipos-body").innerHTML = `
-                    <tr>
-                        <td colspan="5" style="padding: 40px; text-align: center; color: #D9534F; font-weight: bold;">
-                            <i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 10px; display: block;"></i>
-                            No se pudo sincronizar la lista de equipos.<br>
-                            <span style="font-size: 0.85rem; color: #999; font-weight: normal;">Verifica que el archivo guarde los cambios en Drive.</span>
-                        </td>
-                    </tr>
-                `;
             });
-    });
+        });
     </script>
+
+
 
     <!-- ===== FIXTURE ===== -->
     <section id="fixture" style="background: #FDFBF7;">
