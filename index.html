@@ -683,7 +683,16 @@
                 </table>
             </div>
             
-            <div style="margin-top: 16px; text-align: right;">
+            <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <button id="btn-anterior" style="background: #6A1B2A; color: white; border: none; padding: 8px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 0.9rem;">
+                        <i class="fas fa-chevron-left" style="margin-right: 5px;"></i> Anterior
+                    </button>
+                    <button id="btn-siguiente" style="background: #6A1B2A; color: white; border: none; padding: 8px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-left: 8px; font-size: 0.9rem;">
+                        Siguiente <i class="fas fa-chevron-right" style="margin-left: 5px;"></i>
+                    </button>
+                </div>
+                
                 <span style="background: #FDFBF7; padding: 8px 24px; border-radius: 30px; font-size: 0.9rem; border: 1px solid #E8DCC4; display: inline-block; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                     <i class="fas fa-file-excel" style="color: #6A1B2A; margin-right: 5px;"></i> <span id="total-equipos">Total: 0 equipos</span>
                 </span>
@@ -695,39 +704,34 @@
         document.addEventListener("DOMContentLoaded", function() {
             const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSb98PnRM7WWKZjvkYSe3s7J4R2AEIpdK7Kc8wIBqGn8rryxDveAqe-vYxBgXdWjwLwGSNYYDpsJNtf/pub?gid=0&single=true&output=csv";
 
+            let equiposFiltrados = [];
+            let paginaActual = 1;
+            const equiposPorPagina = 7;
+
             Papa.parse(csvUrl, {
                 download: true,
                 header: true,
                 complete: function(results) {
-                    const tbody = document.getElementById("tabla-equipos-body");
-                    tbody.innerHTML = "";
-
-                    let total = 0;
-
-                    results.data.forEach(row => {
-                        // Saltar filas que no contengan un nombre de equipo asignado
-                        if (!row.Equipo || row.Equipo.trim() === "") return;
-
-                        total++;
-
-                        // Alternar color de fondo por fila para mejorar legibilidad (#FDFBF7 / blanco)
-                        const fondoFila = total % 2 === 0 ? '#FDFBF7' : 'white';
-
-                        tbody.innerHTML += `
-                            <tr style="border-bottom: 1px solid #E8DCC4; background: ${fondoFila};">
-                                <td style="padding: 16px; color: #333; font-weight: bold;">${row["#"] || total}</td>
-                                <td style="padding: 16px; color: #666;">${row["Promoción"]}</td>
-                                <td style="padding: 16px;">
-                                    <span style="background: #6A1B2A; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                        ${row["Equipo"]}
-                                    </span>
-                                </td>
-                                <td style="padding: 16px; color: #444; font-weight: 500;">${row["Delegado"]}</td>
-                                <td style="padding: 16px; color: #666;">${row["Deporte"]}</td>
-                            </tr>`;
+                    // Filtrar y guardar solo filas válidas que tengan nombre de equipo
+                    equiposFiltrados = results.data.filter(row => row.Equipo && row.Equipo.trim() !== "");
+                    
+                    // Mostrar la primera página con los primeros 7 equipos
+                    mostrarPagina(paginaActual);
+                    
+                    // Configurar eventos de los botones
+                    document.getElementById("btn-anterior").addEventListener("click", () => {
+                        if (paginaActual > 1) {
+                            paginaActual--;
+                            mostrarPagina(paginaActual);
+                        }
                     });
 
-                    document.getElementById("total-equipos").innerHTML = `Total: ${total} equipos`;
+                    document.getElementById("btn-siguiente").addEventListener("click", () => {
+                        if (paginaActual * equiposPorPagina < equiposFiltrados.length) {
+                            paginaActual++;
+                            mostrarPagina(paginaActual);
+                        }
+                    });
                 },
                 error: function(err) {
                     console.error("Error al procesar el archivo CSV:", err);
@@ -742,6 +746,63 @@
                     `;
                 }
             });
+
+            function mostrarPagina(pagina) {
+                const tbody = document.getElementById("tabla-equipos-body");
+                tbody.innerHTML = "";
+
+                // Calcular el rango de equipos que se van a mostrar
+                const inicio = (pagina - 1) * equiposPorPagina;
+                const fin = inicio + equiposPorPagina;
+                const equiposVisibles = equiposFiltrados.slice(inicio, fin);
+
+                equiposVisibles.forEach((row, index) => {
+                    const numeroReal = inicio + index + 1;
+                    const fondoFila = numeroReal % 2 === 0 ? '#FDFBF7' : 'white';
+
+                    tbody.innerHTML += `
+                        <tr style="border-bottom: 1px solid #E8DCC4; background: ${fondoFila};">
+                            <td style="padding: 16px; color: #333; font-weight: bold;">${row["#"] || numeroReal}</td>
+                            <td style="padding: 16px; color: #666;">${row["Promoción"]}</td>
+                            <td style="padding: 16px;">
+                                <span style="background: #6A1B2A; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    ${row["Equipo"]}
+                                </span>
+                            </td>
+                            <td style="padding: 16px; color: #444; font-weight: 500;">${row["Delegado"]}</td>
+                            <td style="padding: 16px; color: #666;">${row["Deporte"]}</td>
+                        </tr>`;
+                });
+
+                // Actualizar el contador de equipos totales
+                document.getElementById("total-equipos").innerHTML = `Total: ${equiposFiltrados.length} equipos`;
+                
+                // Controlar comportamiento y estilo de los botones
+                const btnAnterior = document.getElementById("btn-anterior");
+                const btnSiguiente = document.getElementById("btn-siguiente");
+
+                // Botón Anterior
+                if (pagina === 1) {
+                    btnAnterior.disabled = true;
+                    btnAnterior.style.opacity = "0.4";
+                    btnAnterior.style.cursor = "not-allowed";
+                } else {
+                    btnAnterior.disabled = false;
+                    btnAnterior.style.opacity = "1";
+                    btnAnterior.style.cursor = "pointer";
+                }
+
+                // Botón Siguiente
+                if (fin >= equiposFiltrados.length) {
+                    btnSiguiente.disabled = true;
+                    btnSiguiente.style.opacity = "0.4";
+                    btnSiguiente.style.cursor = "not-allowed";
+                } else {
+                    btnSiguiente.disabled = false;
+                    btnSiguiente.style.opacity = "1";
+                    btnSiguiente.style.cursor = "pointer";
+                }
+            }
         });
     </script>
 
