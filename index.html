@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bodas de Plata - Promoción 2001 | San Ramón</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #F5ECD7;
+            /* CREMA */
+            color: #2C1810;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== BOTÓN GENERAL ===== */
+        .btn-primary {
+            display: inline-block;
+            background: #6A1B2A;
+            color: #FDFBF7;
+            padding: 14px 40px;
+            border-radius: 60px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid #D4AF37;
+            transition: 0.3s;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 16px rgba(106, 27, 42, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #D4AF37;
+            color: #4A0F1A;
+            transform: scale(1.04);
+            border-color: #F5ECD7;
+        }
+
+        .btn-primary i {
+            margin-right: 10px;
+        }
+
+        /* ===== HEADER / NAV ===== */
+        .top-bar {
+            background: #4A0F1A;
+            padding: 10px 0;
+            border-bottom: 3px solid #D4AF37;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: #FDFBF7;
+            letter-spacing: 2px;
+        }
+
+        .logo h1 span {
+            color: #D4AF37;
+        }
+
+        .logo p {
+            font-size: 0.7rem;
+            color: #D4AF37;
+            letter-spacing: 4px;
+            margin-top: -4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #F5ECD7;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #D4AF37;
+            border-bottom-color: #D4AF37;
+        }
+
+        .nav-links a i {
+            margin-right: 6px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #4A0F1A 0%, #6A1B2A 60%, #4A0F1A 100%);
+            color: #FDFBF7;
+            padding: 80px 0 70px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 6px solid #D4AF37;
+        }
+
+        .hero::before {
+            content: "🏆";
+            font-size: 180px;
+            position: absolute;
+            left: -30px;
+            top: -40px;
+            opacity: 0.06;
+            transform: rotate(-20deg);
+        }
+
+        .hero::after {
+            content: "⚽";
+            font-size: 150px;
+            position: absolute;
+            right: -20px;
+            bottom: -50px;
+            opacity: 0.06;
+            transform: rotate(20deg);
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h2 span {
+            color: #D4AF37;
+        }
+
+        .hero .subtitulo {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            color: #F5ECD7;
+            margin: 12px 0 8px;
+        }
+
+        .hero .badge-plata {
+            display: inline-block;
+            background: linear-gradient(145deg, #D4AF37, #B8962E);
+            color: #4A0F1A;
+            padding: 8px 36px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin: 16px 0 24px;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            border: 2px solid #F5ECD7;
+            letter-spacing: 2px;
+        }
+
+        .hero .btn-hero {
+            font-size: 1.2rem;
+            padding: 16px 48px;
+            margin-top: 10px;
+        }
+
+        /* ===== SECCIÓN ESTADÍSTICAS (estilo Capoeira) ===== */
+        .stats {
+            background: #FDFBF7;
+            padding: 50px 0;
+            border-bottom: 2px solid #E8DCC4;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.4rem;
+            font-weight: 900;
+            color: #6A1B2A;
+            line-height: 1;
+        }
+
+        .stat-item .number span {
+            color: #D4AF37;
+        }
+
+        .stat-item .label {
+            font-weight: 600;
+            color: #5A4A40;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            margin-top: 6px;
+        }
+
+        /* ===== SECCIONES GENERALES ===== */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: #6A1B2A;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .section-title span {
+            color: #D4AF37;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #5A4A40;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* ===== TARJETAS DE SERVICIOS / INFO (estilo Capoeira) ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .card-info {
+            background: #FDFBF7;
+            padding: 30px 24px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #E8DCC4;
+            transition: 0.3s;
+        }
+
+        .card-info:hover {
+            transform: translateY(-8px);
+            border-color: #D4AF37;
+            box-shadow: 0 12px 36px rgba(106, 27, 42, 0.1);
+        }
+
+        .card-info i {
+            font-size: 3.2rem;
+            color: #6A1B2A;
+            background: #F5ECD7;
+            padding: 20px;
+            border-radius: 100px;
+            margin-bottom: 16px;
+            border: 2px solid #D4AF37;
+        }
+
+        .card-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #6A1B2A;
+            margin-bottom: 8px;
+        }
+
+        .card-info p {
+            color: #5A4A40;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* ===== TABLAS ===== */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 16px;
+            border: 1px solid #E8DCC4;
+            background: #FDFBF7;
+            box-shadow: 0 4px 16px rgba(106, 27, 42, 0.06);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: #6A1B2A;
+            color: #F5ECD7;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #E8DCC4;
+        }
+
+        tr:hover {
+            background: #F5ECD7;
+        }
+
+        .badge-equipo {
+            background: #6A1B2A;
+            color: #F5ECD7;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+
+        .posicion {
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: #6A1B2A;
+        }
+
+        .puntos {
+            font-weight: 900;
+            color: #FDFBF7;
+            background: #6A1B2A;
+            padding: 4px 16px;
+            border-radius: 30px;
+            display: inline-block;
+            border: 1px solid #D4AF37;
+        }
+
+        /* ===== ORGANIZADORES ===== */
+        .grid-organizadores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .card-organizador {
+            background: #FDFBF7;
+            border-radius: 20px;
+            padding: 28px 16px 22px;
+            text-align: center;
+            border: 2px solid #E8DCC4;
+            transition: 0.3s;
+        }
+
+        .card-organizador:hover {
+            transform: translateY(-8px);
+            border-color: #D4AF37;
+            box-shadow: 0 12px 32px rgba(106, 27, 42, 0.1);
+        }
+
+        .card-organizador i {
+            font-size: 3.6rem;
+            color: #FDFBF7;
+            background: #6A1B2A;
+            padding: 18px;
+            border-radius: 100px;
+            margin-bottom: 12px;
+            border: 3px solid #D4AF37;
+        }
+
+        .card-organizador h3 {
+            font-family: 'Playfair Display', serif;
+            color: #6A1B2A;
+            font-size: 1.2rem;
+        }
+
+        .card-organizador p {
+            color: #5A4A40;
+            font-size: 0.9rem;
+        }
+
+        .card-organizador .contacto {
+            font-size: 0.8rem;
+            color: #6A1B2A;
+            margin-top: 6px;
+        }
+
+        /* ===== PARTNERS (estilo Capoeira) ===== */
+        .partners {
+            background: #FDFBF7;
+            border-top: 2px solid #E8DCC4;
+            border-bottom: 2px solid #E8DCC4;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .partners .partner-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px 60px;
+            margin-top: 20px;
+        }
+
+        .partners .partner-logos span {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #6A1B2A;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .partners .partner-logos span:hover {
+            opacity: 1;
+            color: #D4AF37;
+        }
+
+        .partners p {
+            color: #5A4A40;
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #4A0F1A;
+            color: #F5ECD7;
+            padding: 40px 0 25px;
+            text-align: center;
+            border-top: 4px solid #D4AF37;
+        }
+
+        footer .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #FDFBF7;
+        }
+
+        footer .footer-logo span {
+            color: #D4AF37;
+        }
+
+        footer p {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #C4B8AA;
+        }
+
+        footer .footer-social {
+            margin: 16px 0 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer .footer-social a {
+            color: #F5ECD7;
+            font-size: 1.4rem;
+            transition: 0.3s;
+        }
+
+        footer .footer-social a:hover {
+            color: #D4AF37;
+            transform: scale(1.2);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .top-bar .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 14px 20px;
+            }
+
+            .nav-links a {
+                font-size: 0.75rem;
+            }
+
+            .hero h2 {
+                font-size: 2.6rem;
+            }
+
+            .hero .subtitulo {
+                font-size: 1.1rem;
+                letter-spacing: 4px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .stat-item .number {
+                font-size: 2.6rem;
+            }
+
+            .partners .partner-logos {
+                gap: 20px 30px;
+            }
+
+            .partners .partner-logos span {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero .btn-hero {
+                font-size: 1rem;
+                padding: 12px 28px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-organizadores {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP BAR / NAV ===== -->
+    <header class="top-bar">
+        <div class="container">
+            <div class="logo">
+                <h1>I.E.P.E. San <span>Ramón</span></h1>
+                <p>PROMOCIÓN 2001 · BODAS DE PLATA</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#info"><i class="fas fa-file-pdf"></i> Info</a></li>
+                <li><a href="#inscritos"><i class="fas fa-users"></i> Inscritos</a></li>
+                <li><a href="#fixture"><i class="fas fa-calendar-alt"></i> Fixture</a></li>
+                <li><a href="#tabla"><i class="fas fa-trophy"></i> Tabla</a></li>
+                <li><a href="#organizadores"><i class="fas fa-user-tie"></i> Organizadores</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <h2>Reencuentro <span>Deportivo</span></h2>
+            <p class="subtitulo">Bodas de Plata 2026 | Promoción 2001</p>
+            <div class="badge-plata"> 25 AÑOS </div>
+            <p style="font-size: 1.3rem; font-weight: 300; color: #F5ECD7; margin: 10px 0 20px;">
+                <i class="fas fa-futbol"></i> Campeonato Deportivo <i class="fas fa-basketball-ball"></i>
+            </p>
+            <a href="#info" class="btn-primary btn-hero"><i class="fas fa-arrow-right"></i> Conoce más</a>
+        </div>
+    </section>
+
+    <!-- ===== ESTADÍSTICAS (estilo ) ===== -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="number">12</div>
+                    <div class="label">Equipos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">8</div>
+                    <div class="label">Deportes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">120</div>
+                    <div class="label">Participantes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">25<span>+</span></div>
+                    <div class="label">Promociones</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN INFO / PDF (estilo Capoeira) ===== -->
+    <section id="info" style="background: #FDFBF7;">
+        <div class="container">
+            <h2 class="section-title">Información del <span>Campeonato</span></h2>
+            <p class="section-sub">
+                Reglamento, cronograma y toda la información oficial. Descárgalo o revísalo aquí.
+            </p>
+
+            <div class="cards-grid" style="margin-bottom: 40px;">
+                <div class="card-info">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>Reglamento</h3>
+                    <p>Normas oficiales del campeonato, categorías y disposiciones generales.</p>
+                </div>
+                <div class="card-info">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Cronograma</h3>
+                    <p>
+                        <li>sábado, 25 de julio</li>
+                        <lu>Inicio 10:00 a.m. a 20:00 </lu>
+                        <li>sábado 01 de agosto | hora: 13:00 a 20:00</li>
+
+                        <li>sábado 08 de agosto | hora: 13:00 a 20:00</li>
+                        <li>sábado 15 de agosto | hora: 13:00 a 20:00</li>
+                        <br>sedes de todos los encuentros deportivos.
+                        <br> "Las Vegas"
+                    </p>
+                </div>
+                <div class="card-info">
+                    <i class="fas fa-medal"></i>
+                    <h3>Premiación</h3>
+                    <p>Trofeos y su caja de cerveza para los ganadores.</p>
+                </div>
+            </div>
+
+            <div class="pdf-wrapper" style="background: #F5ECD7; border-radius: 16px; padding: 12px; border: 1px solid #E8DCC4;">
+                <iframe src="https://drive.google.com/file/d/1hrs2bglcbxJz5HVWtfdCRiHrYM0RnOKw/preview" style="width:100%; height:500px; border-radius:12px; border:none; background:white;"></iframe>
+            </div>
+
+            <div style="text-align: right; margin-top: 16px;">
+                <a href="https://drive.google.com/uc?export=download&id=1hrs2bglcbxJz5HVWtfdCRiHrYM0RnOKw" class="btn-primary" download="Base Campeonato Deportivo de Reencuentor 2026.pdf">
+                    <i class="fas fa-download"></i> Descargar PDF
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INSCRITOS ===== -->
+    <section id="inscritos" style="background: #F5ECD7; padding: 40px 0;">
+        <div class="container" style="max-width: 1140px; margin: 0 auto; padding: 0 15px;">
+            <h2 class="section-title">Equipos <span>Inscritos</span></h2>
+            <p class="section-sub">Lista oficial de equipos, delegados y disciplinas (Actualizado en tiempo real).</p>
+
+            <div class="table-responsive" style="width: 100%; overflow-x: auto; background: white; border-radius: 16px; border: 1px solid #E8DCC4; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <table style="width: 100%; border-collapse: collapse; font-family: sans-serif; text-align: left;">
+                    <thead>
+                        <tr style="background: #6A1B2A; color: white;">
+                            <th style="padding: 16px; font-weight: bold; border-top-left-radius: 16px;">#</th>
+                            <th style="padding: 16px; font-weight: bold;">Equipo</th>
+                            <th style="padding: 16px; font-weight: bold;">Capitán (Delegado)</th>
+                            <th style="padding: 16px; font-weight: bold;">Promoción</th>
+                            <th style="padding: 16px; font-weight: bold; border-top-right-radius: 16px;">Deporte</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-equipos-body">
+                        <tr>
+                            <td colspan="5" style="padding: 30px; text-align: center; color: #666;">
+                                <i class="fas fa-spinner fa-spin"></i> Cargando equipos en tiempo real...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 16px; text-align: right;">
+                <span style="background: #FDFBF7; padding: 8px 24px; border-radius: 30px; font-size: 0.9rem; border: 1px solid #E8DCC4; display: inline-block; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <i class="fas fa-file-excel" style="color: #6A1B2A; margin-right: 5px;"></i> <span id="total-equipos">Total: 0 equipos</span>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Tu URL oficial de publicación CSV
+        const urlExcelCsv = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSb98PnRM7WWKZjvkYSe3s7J4R2AEIpdK7Kc8wIBqGn8rryxDveAqe-vYxBgXdWjwLwGSNYYDpsJNtf/pub?gid=0&single=true&output=csv";
+
+        fetch(urlExcelCsv)
+            .then(response => {
+                if (!response.ok) throw new Error("Error en la red");
+                return response.text();
+            })
+            .then(data => {
+                // Dividir filas limpiando espacios invisibles
+                const filas = data.split(/\r?\n/);
+                const tbody = document.getElementById("tabla-equipos-body");
+                tbody.innerHTML = ""; 
+
+                let contadorEquipos = 0;
+
+                for (let i = 1; i < filas.length; i++) {
+                    if (!filas[i].trim()) continue; 
+
+                    // CORRECCIÓN CLAVE: Separar por punto y coma (;) debido al formato regional de Google en español
+                    const columnas = filas[i].split(";");
+
+                    // Función para limpiar comillas
+                    const limpiar = (texto) => texto ? texto.replace(/^"|"$/g, '').trim() : "";
+
+                    // Mapeo exacto según el orden de tus columnas:
+                    // Columna 0 = # | Columna 1 = Promoción | Columna 2 = Equipo | Columna 3 = Delegado | Columna 4 = Deporte
+                    const num = limpiar(columnas[0]);
+                    const promocion = limpiar(columnas[1]);
+                    const equipo = limpiar(columnas[2]);
+                    const delegado = limpiar(columnas[3]);
+                    const deporte = limpiar(columnas[4]);
+
+                    // Si no hay nombre de equipo o coincide con la cabecera, saltar fila
+                    if (!equipo || equipo.toLowerCase() === "equipo") continue;
+
+                    contadorEquipos++;
+
+                    const nuevaFila = `
+                        <tr style="border-bottom: 1px solid #E8DCC4; background: ${contadorEquipos % 2 === 0 ? '#FDFBF7' : 'white'};">
+                            <td style="padding: 16px; color: #333; font-weight: bold;">${num || contadorEquipos}</td>
+                            <td style="padding: 16px;">
+                                <span style="background: #6A1B2A; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    ${equipo}
+                                </span>
+                            </td>
+                            <td style="padding: 16px; color: #444; font-weight: 500;">${delegado}</td>
+                            <td style="padding: 16px; color: #666;">${promocion}</td>
+                            <td style="padding: 16px; color: #666;">${deporte}</td>
+                        </tr>
+                    `;
+                    tbody.insertAdjacentHTML("beforeend", nuevaFila);
+                }
+
+                document.getElementById("total-equipos").innerText = `Total: ${contadorEquipos} equipos`;
+            })
+            .catch(error => {
+                console.error("Error original:", error);
+                document.getElementById("tabla-equipos-body").innerHTML = `
+                    <tr>
+                        <td colspan="5" style="padding: 40px; text-align: center; color: #D9534F; font-weight: bold;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 10px; display: block;"></i>
+                            No se pudo sincronizar la lista de equipos.<br>
+                            <span style="font-size: 0.85rem; color: #999; font-weight: normal;">Verifica que el archivo guarde los cambios en Drive.</span>
+                        </td>
+                    </tr>
+                `;
+            });
+    });
+    </script>
+
+    <!-- ===== FIXTURE ===== -->
+    <section id="fixture" style="background: #FDFBF7;">
+        <div class="container">
+            <h2 class="section-title"><span>Fixture</span> del Torneo</h2>
+            <p class="section-sub">Próximos encuentros del campeonato.</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Local</th>
+                            <th>Visitante</th>
+                            <th>Cancha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>15/07/2026</td><td>10:00</td><td><span class="badge-equipo">Titanes</span></td><td><span class="badge-equipo">Halcones</span></td><td>Principal</td></tr>
+                        <tr><td>15/07/2026</td><td>12:00</td><td><span class="badge-equipo">Águilas</span></td><td><span class="badge-equipo">Leones</span></td><td>Principal</td></tr>
+                        <tr><td>16/07/2026</td><td>10:00</td><td><span class="badge-equipo">Cóndores</span></td><td><span class="badge-equipo">Panteras</span></td><td>Secundaria</td></tr>
+                        <tr><td>16/07/2026</td><td>14:00</td><td><span class="badge-equipo">Titanes</span></td><td><span class="badge-equipo">Leones</span></td><td>Principal</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TABLA DE POSICIONES ===== -->
+    <section id="tabla" style="background: #F5ECD7;">
+        <div class="container">
+            <h2 class="section-title">Tabla de <span>Posiciones</span></h2>
+            <p class="section-sub">Así va la competencia. ¡Actualizado en tiempo real!</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pos</th>
+                            <th>Equipo</th>
+                            <th>PJ</th>
+                            <th>G</th>
+                            <th>E</th>
+                            <th>P</th>
+                            <th>GF</th>
+                            <th>GC</th>
+                            <th>DG</th>
+                            <th>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="posicion">1</td><td><span class="badge-equipo">Titanes</span></td><td>2</td><td>2</td><td>0</td><td>0</td><td>5</td><td>1</td><td>+4</td><td><span class="puntos">6</span></td></tr>
+                        <tr><td class="posicion">2</td><td><span class="badge-equipo">Halcones</span></td><td>2</td><td>1</td><td>1</td><td>0</td><td>3</td><td>2</td><td>+1</td><td><span class="puntos">4</span></td></tr>
+                        <tr><td class="posicion">3</td><td><span class="badge-equipo">Águilas</span></td><td>2</td><td>1</td><td>0</td><td>1</td><td>4</td><td>3</td><td>+1</td><td><span class="puntos">3</span></td></tr>
+                        <tr><td class="posicion">4</td><td><span class="badge-equipo">Leones</span></td><td>2</td><td>0</td><td>1</td><td>1</td><td>2</td><td>3</td><td>-1</td><td><span class="puntos">1</span></td></tr>
+                        <tr><td class="posicion">5</td><td><span class="badge-equipo">Cóndores</span></td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>2</td><td>-2</td><td><span class="puntos">0</span></td></tr>
+                        <tr><td class="posicion">6</td><td><span class="badge-equipo">Panteras</span></td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>4</td><td>-3</td><td><span class="puntos">0</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ORGANIZADORES ===== -->
+    <section id="organizadores" style="background: #FDFBF7;">
+        <div class="container">
+            <h2 class="section-title"><span>Organizadores</span></h2>
+            <p class="section-sub">Ellos hacen posible este gran reencuentro. ¡Gracias por su dedicación!</p>
+            <br>
+            <h3>Junta Directiva</h3>
+            <br>
+            <div class="grid-organizadores">
+                <div class="card-organizador">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Jesús H. Soca</h3>
+                    <p>Presidente</p>
+                    <p class="contacto"><i class="fas fa-phone"></i> +51 987 654 321</p>
+                </div>
+                <div class="card-organizador">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Mardonio Barzola</h3>
+                    <p>VicePresidente</p>
+                    <p class="contacto"><i class="fas fa-envelope"></i> maria.p@sanramon.pe</p>
+                </div>
+                <div class="card-organizador">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Edith Gómez</h3>
+                    <p>Economia y finanzas</p>
+                    <p class="contacto"><i class="fas fa-globe"></i> @robertoflores</p>
+                </div>
+                <div class="card-organizador">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Milka Flores</h3>
+                    <p>Secretaria</p>
+                    <p class="contacto"><i class="fas fa-calendar"></i> Promoción 2001</p>
+                </div>
+            </div>
+            <br>
+            <h3>Comité Deportivo</h3>
+            <br>
+            <div class="grid-organizadores">
+                <div class="card-organizador">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Jesús H. Soca</h3>
+                    <p>Presidente</p>
+                    <p class="contacto"><i class="fas fa-phone"></i> +51 987 654 321</p>
+                </div>
+                <div class="card-organizador">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Mardonio Barzola</h3>
+                    <p>VicePresidente</p>
+                    <p class="contacto"><i class="fas fa-envelope"></i> maria.p@sanramon.pe</p>
+                </div>
+                <div class="card-organizador">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Edith Gómez</h3>
+                    <p>Economia y finanzas</p>
+                    <p class="contacto"><i class="fas fa-globe"></i> @robertoflores</p>
+                </div>
+                <div class="card-organizador">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Milka Flores</h3>
+                    <p>Secretaria</p>
+                    <p class="contacto"><i class="fas fa-calendar"></i> Promoción 2001</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PARTNERS ===== -->
+    <section class="partners">
+        <div class="container">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: #6A1B2A;">
+                <span style="color: #D4AF37;">Auspiciadores</span>
+            </h2>
+            <p>Gracias al apoyo de nuestros aliados, hacemos posible este gran evento.</p>
+            <div class="partner-logos">
+                <span>I.E.P.E. "San Ramón"</span>
+                <span>MB INGENIERÍA</span>
+                <span>B DATA</span>
+                <span>ALBUHO</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INFO ADICIONAL (estilo Capoeira) ===== -->
+    <section style="background: #F5ECD7; padding:3 
