@@ -334,7 +334,7 @@
         }
 
         .card-info i {
-            font-size: 3.2rem;
+            font-size: 1rem;
             color: #6A1B2A;
             background: #F5ECD7;
             padding: 20px;
@@ -354,6 +354,99 @@
             color: #5A4A40;
             font-size: 0.95rem;
             line-height: 1.5;
+        }
+
+        /* ------------- CARTAR INFO----------*/
+        /* --- Ajustes generales para el contenido interno de los Cards --- */
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            text-align: left; /* Cambiado a alineación izquierda para mejorar la lectura de datos */
+            padding: 25px;
+        }
+        .card-info h3 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .card-info i.fas, .card-info i.fab {
+            align-self: center;
+            margin-bottom: 10px;
+        }
+        .card-divider {
+            border: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            margin: 15px 0;
+        }
+
+        /* --- Tabla del Cronograma --- */
+        .tabla-cronograma {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .tabla-cronograma th, .tabla-cronograma td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tabla-cronograma th {
+            background-color: rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            text-align: left;
+        }
+        .sedes-info {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* --- Listas internas sin viñetas raras --- */
+        .lista-costos, .medios-pago, .lista-turnos {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            font-size: 0.95rem;
+        }
+        .lista-costos li, .medios-pago li, .lista-turnos li {
+            margin-bottom: 8px;
+        }
+
+        /* --- Botones de Canales de Comunicación --- */
+        .enlaces-comunidad {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn-enlace {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+            color: #ffffff;
+        }
+        .btn-whatsapp {
+            background-color: #25D366;
+        }
+        .btn-whatsapp:hover {
+            background-color: #1ebd54;
+            transform: translateY(-2px);
+        }
+        .btn-meet {
+            background-color: #00796B;
+        }
+        .btn-meet:hover {
+            background-color: #004D40;
+            transform: translateY(-2px);
         }
 
         /* ===== TABLAS ===== */
@@ -698,31 +791,86 @@
             </p>
 
             <div class="cards-grid" style="margin-bottom: 40px;">
-                <div class="card-info">
-                    <i class="fas fa-file-pdf"></i>
-                    <h3>Reglamento</h3>
-                    <p>Normas oficiales del campeonato, categorías y disposiciones generales.</p>
-                </div>
-                <div class="card-info">
-                    <i class="fas fa-calendar-check"></i>
-                    <h3>Cronograma</h3>
-                    <p>
-                        <li>sábado, 25 de julio</li>
-                        <lu>Inicio 10:00 a.m. a 20:00 </lu>
-                        <li>sábado 01 de agosto | hora: 13:00 a 20:00</li>
-
-                        <li>sábado 08 de agosto | hora: 13:00 a 20:00</li>
-                        <li>sábado 15 de agosto | hora: 13:00 a 20:00</li>
-                        <br>sedes de todos los encuentros deportivos.
-                        <br> "Las Vegas"
+    
+            <div class="card-info card-inscripciones">
+                <i class="fas fa-cash-register"></i>
+                <h3>Inscripciones</h3>
+                <div class="card-body-content">
+                    <p class="costo-destacado"><strong>Costo:</strong></p>
+                    <ul class="lista-costos">
+                        <li><span class="fecha-limite">Hasta el 17 de julio:</span> <strong>S/ 150.00</strong></li>
+                        <li><span class="fecha-limite">Desde el 18 de julio:</span> <strong>S/ 180.00</strong></li>
+                    </ul>
+                    <hr class="card-divider">
+                    <p class="pago-info">
+                        Los pagos se realizan a la <strong>Srta. Edith Gómez</strong> a través de:
                     </p>
-                </div>
-                <div class="card-info">
-                    <i class="fas fa-medal"></i>
-                    <h3>Premiación</h3>
-                    <p>Trofeos y su caja de cerveza para los ganadores.</p>
+                    <ul class="medios-pago">
+                        <li><i class="fab fa-whatsapp style-yape"></i> <strong>Yape:</strong> 999 195 494</li>
+                        <li><i class="fas fa-university"></i> <strong>Cuenta BCP:</strong> 22003556191012</li>
+                    </ul>
                 </div>
             </div>
+
+            <div class="card-info card-cronograma">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Cronograma</h3>
+                <p class="tabla-intro">Los partidos se llevarán a cabo en las fechas indicadas:</p>
+                
+                <table class="tabla-cronograma">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Horario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sábado, 25 de julio</td>
+                            <td>10:00 a.m. a 20:00</td>
+                        </tr>
+                        <tr>
+                            <td>Sábado, 01 de agosto</td>
+                            <td>13:00 a 20:00</td>
+                        </tr>
+                        <tr>
+                            <td>Sábado, 08 de agosto</td>
+                            <td>13:00 a 20:00</td>
+                        </tr>
+                        <tr>
+                            <td>Sábado, 15 de agosto</td>
+                            <td>13:00 a 20:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="sedes-info">
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Sedes:</strong> Se jugará en el Grass <strong>"La Cumbre"</strong> y una fecha en el Grass <strong>"Las Vegas"</strong>.</p>
+                </div>
+            </div>
+
+            <div class="card-info card-informes">
+                <i class="fas fa-info-circle"></i>
+                <h3>Informes</h3>
+                <div class="card-body-content">
+                    <p class="turnos-titulo"><strong>Atención y consultas:</strong></p>
+                    <ul class="lista-turnos">
+                        <li><strong>Turno Mañana:</strong> 93696336 (Kelly)</li>
+                        <li><strong>Turno Tarde:</strong> 902636777 (Mardonio)</li>
+                    </ul>
+                    
+                    <div class="enlaces-comunidad">
+                        <a href="https://chat.whatsapp.com/CrYzWVgXevZCUBMh43VJyh?s=sh&p=a&ilr=1&amv=2" target="_blank" class="btn-enlace btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Grupo de WhatsApp
+                        </a>
+                        <a href="https://meet.google.com/usr-pdha-yzf" target="_blank" class="btn-enlace btn-meet">
+                            <i class="fas fa-video"></i> Reunión por Meet
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
             <div class="pdf-wrapper" style="background: #F5ECD7; border-radius: 16px; padding: 12px; border: 1px solid #E8DCC4;">
                 <iframe src="https://drive.google.com/file/d/1hrs2bglcbxJz5HVWtfdCRiHrYM0RnOKw/preview" style="width:100%; height:500px; border-radius:12px; border:none; background:white;"></iframe>
